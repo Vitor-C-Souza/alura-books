@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Vitor-C-Souza/-Node.js-API-Rest-com-Express-e-MongoDB#readme",
   "devDependencies": {
+    "eslint": "^8.43.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {

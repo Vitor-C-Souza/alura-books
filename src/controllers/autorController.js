@@ -1,62 +1,62 @@
-import autores from "../models/autor.js"
+import autores from "../models/autor.js";
 
 class AutorController {
 
-    static listarAutores = (req,res) => {
+  static listarAutores = (req,res) => {
 
-        autores.find((err, autores) => {
-            res.status(200).json(autores)
-        })
-    }
+    autores.find((err, autores) => {
+      res.status(200).json(autores);
+    });
+  };
     
-    static PegaAutor = (req,res) => {
-        const id = req.params.id
+  static PegaAutor = (req,res) => {
+    const id = req.params.id;
 
-        autores.findById(id, (err, autores) =>{
-            if(err) {
-                res.status(400).send({message: `${err.message} - Id do autor não localizado.`})
-            } else{
-                res.status(200).send(autores)
-            }
-        })
-    }
+    autores.findById(id, (err, autores) =>{
+      if(err) {
+        res.status(400).send({message: `${err.message} - Id do autor não localizado.`});
+      } else{
+        res.status(200).send(autores);
+      }
+    });
+  };
 
-    static CadastrarAutor = (req,res) => {
-        const autor = new autores(req.body)
+  static CadastrarAutor = (req,res) => {
+    const autor = new autores(req.body);
         
-        autor.save((err) => {
-            if(err) {
-                res.status(500).send({message: `${err.message} - falha ao cadastrar autor`})
-            } else {
-                res.status(201).json(autor) 
-            }
-        })        
-    }
+    autor.save((err) => {
+      if(err) {
+        res.status(500).send({message: `${err.message} - falha ao cadastrar autor`});
+      } else {
+        res.status(201).json(autor); 
+      }
+    });        
+  };
 
-    static AtualizaAutor = (req,res) => {
-        const id = req.params.id
+  static AtualizaAutor = (req,res) => {
+    const id = req.params.id;
 
-        autores.findByIdAndUpdate(id, { $set: req.body}, (err) => {
-            if(!err) {
-                res.status(200).send({ message: 'autor atualizado com sucesso' })
-            } else{
-                res.status(500).send({message: err.message})
-            }
-        })
-    }
+    autores.findByIdAndUpdate(id, { $set: req.body}, (err) => {
+      if(!err) {
+        res.status(200).send({ message: "autor atualizado com sucesso" });
+      } else{
+        res.status(500).send({message: err.message});
+      }
+    });
+  };
 
-    static excluirAutor = (req, res) => {
-        const id = req.params.id
+  static excluirAutor = (req, res) => {
+    const id = req.params.id;
 
-        autores.findByIdAndDelete(id, (err) => {
-            if(!err){
-                res.status(200).send({message: 'autor removido com sucesso'})
-            } else{
-                res.status(500).send({message: err.message})
-            }
-        })
-    }
+    autores.findByIdAndDelete(id, (err) => {
+      if(!err){
+        res.status(200).send({message: "autor removido com sucesso"});
+      } else{
+        res.status(500).send({message: err.message});
+      }
+    });
+  };
 
 }
 
-export default AutorController
+export default AutorController;
