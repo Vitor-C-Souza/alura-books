@@ -72,10 +72,18 @@ class LivroController {
     }
   };
 
-  static ListarLivroPorEditora = async (req, res, next) => {
-    const editora = req.query.editora;
+  static ListarLivroPorFiltro = async (req, res, next) => {
+    const { editora, titulo, minPaginas, maxPaginas } = req.query;
     try {
-      const livrosResultado = await livros.find({ editora: editora });
+      const busca = {};
+
+      if (editora) busca.editora = { $regex: editora, $options: "i" };
+      if (titulo) busca.titulo = { $regex: titulo, $options: "i" };
+      if (minPaginas) busca.numeroPaginas = { $gte: minPaginas };
+      if (maxPaginas) busca.numeroPaginas = { $lte: maxPaginas };
+
+
+      const livrosResultado = await livros.find(busca);
 
       res.status(200).send(livrosResultado);
     } catch (erro) {
